@@ -61,6 +61,12 @@ const displayWeather = (apiKey, city) => {
 const displayCurrent = (city) => {
     console.log(city);
 
+    let dateEl = document.createElement("p");
+    dateEl.textContent = unixTimeConverter(city.current.dt);
+
+    let iconEl = document.createElement("img");
+    iconEl.src = `http://openweathermap.org/img/wn/${city.current.weather[0].icon}.png`;
+
     let tempEl = document.createElement("p");
     tempEl.textContent = `Temp: ${city.current.temp} °F`;
 
@@ -73,12 +79,20 @@ const displayCurrent = (city) => {
     let uvindexEl = document.createElement("p");
     uvindexEl.textContent = `UV Index: ${city.current.uvi}`;
 
-    presentEl.append(tempEl, windEl, humidityEl, uvindexEl);
+    presentEl.append(dateEl, iconEl, tempEl, windEl, humidityEl, uvindexEl);
 }
 
 const displayForecast = (city) => {
-    for (let i = 0; i < 5; i++) {
+    // I can't tell if daily[0] was the next day or daily[1].
+    // the timestamp for daily[0] was always today so I decided to start at daily[1]
+    for (let i = 1; i < 6; i++) {
         let dayEl = document.createElement("div");
+
+        let dateEl = document.createElement("p");
+        dateEl.textContent = unixTimeConverter(city.daily[i].dt);    
+
+        let iconEl = document.createElement("img");
+        iconEl.src = `http://openweathermap.org/img/wn/${city.daily[i].weather[0].icon}.png`
 
         let tempEl = document.createElement("p");
         tempEl.textContent = `Temp: ${city.daily[i].temp.day} °F`;
@@ -89,9 +103,14 @@ const displayForecast = (city) => {
         let humidityEl = document.createElement("p");
         humidityEl.textContent = `Humidity: ${city.daily[i].humidity} %`;
     
-        dayEl.append(tempEl, windEl, humidityEl);
+        dayEl.append(dateEl, iconEl, tempEl, windEl, humidityEl);
         futureEl.append(dayEl);
     }
+}
+
+const unixTimeConverter = (unix) => {
+    let date = new Date(unix * 1000);
+    return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
 }
 
 cityFormEl.addEventListener("submit", formSubmitHandler);
