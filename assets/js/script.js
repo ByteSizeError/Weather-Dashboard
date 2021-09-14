@@ -128,7 +128,19 @@ const displayCurrent = (city) => {
     humidityEl.textContent = `Humidity: ${city.current.humidity} %`;
 
     let uvindexEl = document.createElement("p");
-    uvindexEl.textContent = `UV Index: ${city.current.uvi}`;
+    let uvIndex = city.current.uvi;
+
+    uvindexEl.textContent = `UV Index: ${uvIndex}`;
+    
+    if (uvIndex <= 2) {
+        uvindexEl.classList.add("favorable");
+    }
+    else if (uvIndex <= 5) {
+        uvindexEl.classList.add("moderate");
+    }
+    else if (uvIndex > 5) {
+        uvindexEl.classList.add("severe");
+    }
 
     rightCurr.append(tempEl, windEl, humidityEl, uvindexEl);
 

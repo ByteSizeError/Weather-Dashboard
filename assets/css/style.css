@@ -5,7 +5,7 @@ body {
 
 #sidebar {
     width: 20%;
-    margin: 50px;
+    margin: 35px;
     position: fixed;
 }
 
@@ -104,6 +104,22 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.favorable {
+    background-color: green;
+}
+
+.moderate {
+    background-color: orange;
+}
+
+.severe {
+    background-color: red;
+}
+
+.favorable, .moderate, .severe {
+    border-radius: 1em;
 }
 
 @media screen and (max-width: 1200px) {
