@@ -12,17 +12,19 @@
     <title>Weather Dashboard</title>
 </head>
 
+<!-- preset location to Seattle so the dashboard isnt empty -->
 <body onload="getCityConditions('Seattle')">
     <header>
         <h1>Weather Dashboard</h1>
     </header>
     <div id="sidebar">
         <form id="city-form">
-            <label for="city">Search for a City:</label>
+            <label for="city"><h2>Search for a City:</h2></label>
             <input type="text" id="city" placeholder="Seattle">
             <input type="submit" id="search-btn" value="Search">
         </form>
         <br>
+        <h2>History</h2>
         <div id="search-history"></div>
     </div>
     <main>
