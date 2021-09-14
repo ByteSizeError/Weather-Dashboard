@@ -1,0 +1,65 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#sidebar {
+    width: 20%;
+    position: fixed;
+}
+
+main {
+    margin-left: 25%;
+}
+
+#city-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#city {
+    border-radius: 1em;
+    padding: 5px;
+}
+
+#search-btn, button {
+    background-color: lightslategray;
+    border-color: lightslategray;
+    border-radius: 1em;
+    color: white;
+    margin: 1px;
+    cursor: pointer;
+    border-style: solid;
+    padding: 5px;
+}
+
+#search-btn {
+    background-color: dodgerblue;
+    border-color: dodgerblue;
+}
+
+#search-history {
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+#present, .forecast{
+    border-radius: 2em;
+    border-color:dodgerblue;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    background-color: dodgerblue;
+    color: white;
+    padding: 25px;
+}
+
+#future {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}

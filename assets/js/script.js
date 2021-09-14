@@ -3,17 +3,50 @@ var cityInputEl = document.querySelector("#city");
 var cityNameEl = document.querySelector("#city-name");
 var presentEl = document.querySelector("#present");
 var futureEl = document.querySelector("#future");
+var historyEl = document.querySelector("#search-history");
 
 const formSubmitHandler = (e) => {
     e.preventDefault();
 
-    var cityname = cityInputEl.value.trim();
+    var city = cityInputEl.value.trim();
 
-    if (cityname) {
-        getCityConditions(cityname);
+    if (city) {
+        // clears the previous search result
+        presentEl.innerHTML = "";
+        futureEl.innerHTML = "";
+        getCityConditions(city);
     }
     else {
+        alert("Please enter a City");
+    }
+}
 
+const buttonClickHandler = (e) => {
+    var city = e.target.getAttribute("data-city");
+
+    presentEl.innerHTML = "";
+    futureEl.innerHTML = "";
+    getCityConditions(city);
+
+}
+
+const addSearch = (city) => {
+    var history = JSON.parse(localStorage.getItem("history")) || [];
+    history.unshift(city);
+    localStorage.setItem("history", JSON.stringify(history));
+    displaySearch();
+}
+
+const displaySearch = () => {
+    // clear old history to bring in the updated one
+    historyEl.innerHTML = "";
+    var history = JSON.parse(localStorage.getItem("history")) || [];
+
+    for (let i = 0; i < history.length; i++) {
+        let search = document.createElement("button");
+        search.setAttribute("data-city", history[i]);
+        search.textContent = history[i];
+        historyEl.append(search);
     }
 }
 
@@ -27,6 +60,7 @@ const getCityConditions = (city) => {
             if (response.ok) {
                 response.json().then((data) => {
                     cityNameEl.textContent = data.name;
+                    addSearch(data.name);
                     displayWeather(apiKey, data);
                 });
             } else {
@@ -87,9 +121,10 @@ const displayForecast = (city) => {
     // the timestamp for daily[0] was always today so I decided to start at daily[1]
     for (let i = 1; i < 6; i++) {
         let dayEl = document.createElement("div");
+        dayEl.classList.add("forecast");
 
         let dateEl = document.createElement("p");
-        dateEl.textContent = unixTimeConverter(city.daily[i].dt);    
+        dateEl.textContent = unixTimeConverter(city.daily[i].dt);
 
         let iconEl = document.createElement("img");
         iconEl.src = `http://openweathermap.org/img/wn/${city.daily[i].weather[0].icon}.png`
@@ -99,10 +134,10 @@ const displayForecast = (city) => {
 
         let windEl = document.createElement("p");
         windEl.textContent = `Wind: ${city.daily[i].wind_speed} MPH`;
-    
+
         let humidityEl = document.createElement("p");
         humidityEl.textContent = `Humidity: ${city.daily[i].humidity} %`;
-    
+
         dayEl.append(dateEl, iconEl, tempEl, windEl, humidityEl);
         futureEl.append(dayEl);
     }
@@ -114,3 +149,4 @@ const unixTimeConverter = (unix) => {
 }
 
 cityFormEl.addEventListener("submit", formSubmitHandler);
+historyEl.addEventListener("click", buttonClickHandler);

@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <title>Weather Dashboard</title>
 </head>
 
-<body>
+<body onload="getCityConditions('Seattle')">
     <header>
         <h1>Weather Dashboard</h1>
     </header>
@@ -17,8 +20,9 @@
         <form id="city-form">
             <label for="city">Search for a City:</label>
             <input type="text" id="city" placeholder="Seattle">
-            <input type="submit" value="Search">
+            <input type="submit" id="search-btn" value="Search">
         </form>
+        <br>
         <div id="search-history"></div>
     </div>
     <main>
