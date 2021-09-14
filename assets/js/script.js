@@ -132,6 +132,7 @@ const displayCurrent = (city) => {
 
     uvindexEl.textContent = `UV Index: ${uvIndex}`;
     
+    // checks the UV index to see which rating to give
     if (uvIndex <= 2) {
         uvindexEl.classList.add("favorable");
     }

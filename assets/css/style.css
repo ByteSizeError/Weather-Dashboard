@@ -3,22 +3,26 @@ body {
     background-color: rgb(230,230,230);
 }
 
+/* sidebar style for search and history */
 #sidebar {
     width: 20%;
     margin: 35px;
     position: fixed;
 }
 
+/* contains the weather conditions */
 main {
     margin: 50px;
     margin-left: 25%;
 }
 
+/* the search form elements will be stacked */
 #city-form {
     display: flex;
     flex-direction: column;
 }
 
+/* the search box will be rounded */
 #city {
     border-radius: 1em;
     padding: 5px;
@@ -26,10 +30,12 @@ main {
     font-size: large;
 }
 
+/* hovering on the search box will make border blue */
 #city:hover {
     border-color: dodgerblue;
 }
 
+/* make all the buttons rouneded */
 #search-btn, button {
     background-color: lightslategray;
     border-color: lightslategray;
@@ -43,34 +49,41 @@ main {
     font-size: large;
 }
 
+/* search button is blue instead */
 #search-btn {
     background-color: dodgerblue;
     border-color: dodgerblue;
 }
 
+/* search button will become white on hover */
 #search-btn:hover {
     background-color: white;
     color: dodgerblue;
 }
 
+/* history buttons will become white on hover */
 button:hover {
     background-color: white;
     color: lightslategray;
 }
 
+/* make the search history stacked */
 #search-history {
     display: flex;
     flex-direction: column;
 }
 
+/* text aligned to center of container */
 h1, h2 {
     text-align: center;
 }
 
+/* all weather condition info made large */
 p {
     font-size: large;
 }
 
+/* the weather condition cards all blue with rounded corners */
 #present, .forecast{
     border-radius: 2em;
     border-color:dodgerblue;
@@ -82,17 +95,20 @@ p {
     padding: 25px;
 }
 
+/* present has its contents divided in half */
 #present {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
+/* the 5 day forecast has 13% width to make them fit next to each other */
 .forecast {
     width: 13%;
     max-width: 100%;
 }
 
+/* the 5 day forecast container has its contents in a row and also wraps them */
 #future {
     display: flex;
     flex-wrap: wrap;
@@ -100,12 +116,14 @@ p {
     justify-content: space-between;
 }
 
+/* for the current weather condition to space out the text */
 .current-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+/* uv index conditions */
 .favorable {
     background-color: green;
 }
@@ -118,10 +136,12 @@ p {
     background-color: red;
 }
 
+/* makes them rounded */
 .favorable, .moderate, .severe {
     border-radius: 1em;
 }
 
+/* for smaller computer screens */
 @media screen and (max-width: 1200px) {
 
     .forecast {
@@ -140,6 +160,7 @@ p {
     }
 }
 
+/* for tablet screens */
 @media screen and (max-width: 870px) {
     .forecast {
         width: 100%;
@@ -151,6 +172,7 @@ p {
     }
 }
 
+/* for phone screens */
 @media screen and (max-width: 660px) {
     #sidebar {
         width: 90%;
