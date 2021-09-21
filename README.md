@@ -8,26 +8,26 @@ This project lets the user search up any city and it will display the cities cur
 
 ## Project Demo
 ### Computer Screen
-![computer-screen](assets/images/ComputerScreen.png)
+![computer-screen](/assets/images/ComputerScreen.png)
 * This shows what the application will look like on a regular computer screen. 
 * The 5 day forecast will be displayed in a row.
 * The search bar and search history will be on the left.
 
 ### Smaller Computer Screen
-![small-screen](assets/images/SmallerComputerScreen.png)
+![small-screen](/assets/images/SmallerComputerScreen.png)
 * This shows what the application will look like on a smaller computer screen.  
 * The 5 days forecast will begin to split up to cover more room. 
 * The user will be able to scroll futher down to see the rest of the forecast.
 
 ### Tablet Screen
-![tablet-screen](assets/images/TabletScreen.png)
+![tablet-screen](/assets/images/TabletScreen.png)
 * This shows what the application will look like on a tablet.
 * The search bar will still be shown on the left side. 
 * The weather cards will stack nicely on each other.
 
 ### Phone Screen
-![phone-search](assets/images/PhoneScreenSearch.png)
-![phone-screen](assets/images/PhoneScreen.png)
+![phone-search](/assets/images/PhoneScreenSearch.png)
+![phone-screen](/assets/images/PhoneScreen.png)
 * This shows what the application will look like on a phone.
 * The search bar will be put at the top of the weather cards.
 * The weather conditions will now be located at the bottom of the search history.
