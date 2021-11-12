@@ -1,6 +1,5 @@
 body {
-    font-family: 'Open Sans', sans-serif;
-    background-color: rgb(230,230,230);
+    font-family: "Open Sans", sans-serif;
 }
 
 /* sidebar style for search and history */
@@ -36,7 +35,8 @@ main {
 }
 
 /* make all the buttons rouneded */
-#search-btn, button {
+#search-btn,
+button {
     background-color: lightslategray;
     border-color: lightslategray;
     border-radius: 1em;
@@ -74,7 +74,8 @@ button:hover {
 }
 
 /* text aligned to center of container */
-h1, h2 {
+h1,
+h2 {
     text-align: center;
 }
 
@@ -84,16 +85,17 @@ p {
 }
 
 /* the weather condition cards all blue with rounded corners */
-#present, .forecast{
+/* #present,
+.forecast {
     border-radius: 2em;
-    border-color:dodgerblue;
+    border-color: dodgerblue;
     border-width: 1px;
     border-style: solid;
     text-align: center;
     background-color: dodgerblue;
     color: white;
     padding: 25px;
-}
+} */
 
 /* present has its contents divided in half */
 #present {
@@ -137,13 +139,14 @@ p {
 }
 
 /* makes them rounded */
-.favorable, .moderate, .severe {
+.favorable,
+.moderate,
+.severe {
     border-radius: 1em;
 }
 
 /* for smaller computer screens */
 @media screen and (max-width: 1200px) {
-
     .forecast {
         width: 40%;
         margin-bottom: 25px;
@@ -179,7 +182,7 @@ p {
         margin: 20px;
         position: relative;
     }
-    
+
     main {
         width: 90%;
         margin: 20px;

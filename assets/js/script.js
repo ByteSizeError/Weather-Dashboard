@@ -17,10 +17,7 @@ const formSubmitHandler = (e) => {
         futureEl.innerHTML = "";
         getCityConditions(city);
     }
-    else {
-        alert("Please enter a City");
-    }
-}
+};
 
 // this function checks for button click on the search history log
 const buttonClickHandler = (e) => {
@@ -29,8 +26,7 @@ const buttonClickHandler = (e) => {
     presentEl.innerHTML = "";
     futureEl.innerHTML = "";
     getCityConditions(city);
-
-}
+};
 
 // this function adds city into the search history
 const addSearch = (city) => {
@@ -42,9 +38,9 @@ const addSearch = (city) => {
 
     localStorage.setItem("history", JSON.stringify(history));
     displaySearch();
-}
+};
 
-// this function displays all the search history 
+// this function displays all the search history
 const displaySearch = () => {
     // clear old history to bring in the updated one
     historyEl.innerHTML = "";
@@ -54,16 +50,34 @@ const displaySearch = () => {
         let search = document.createElement("button");
         search.setAttribute("data-city", history[i]);
         search.textContent = history[i];
-        historyEl.append(search);
+        search.classList.add("dropdown-item");
+
+        let liEl = document.createElement("li");
+        liEl.append(search);
+
+        historyEl.append(liEl);
     }
-}
+
+    let liDividerEl = document.createElement("li");
+    let dividerEl = document.createElement("hr");
+    dividerEl.classList.add("dropdown-divider");
+    liDividerEl.append(dividerEl);
+
+    let liClearEl = document.createElement("li");
+    let clearEl = document.createElement("button");
+    clearEl.classList.add("dropdown-item");
+    clearEl.textContent = "Clear";
+    liClearEl.append(clearEl);
+
+    historyEl.append(liDividerEl, liClearEl);
+};
 
 // this function is responsible for fetching the lat and lon from open weather
 const getCityConditions = (city) => {
     var apiKey = "708f99243b2b2df3796c8b8b567310b5";
     var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
 
-    console.log(apiUrl)
+    console.log(apiUrl);
     fetch(apiUrl)
         .then((response) => {
             if (response.ok) {
@@ -73,19 +87,19 @@ const getCityConditions = (city) => {
                     displayWeather(apiKey, data);
                 });
             } else {
-                alert('Error: ' + response.statusText);
+                alert("Error: " + response.statusText);
             }
         })
         .catch((error) => {
-            alert('Unable to connect to OpenWeather');
+            alert("Unable to connect to OpenWeather");
         });
-}
+};
 
 // this function takes the lat and lon from open weather and used the onecall api to get 7 day forecast
 const displayWeather = (apiKey, city) => {
     var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coord.lat}&lon=${city.coord.lon}&units=imperial&appid=${apiKey}`;
 
-    console.log(apiUrl)
+    console.log(apiUrl);
     fetch(apiUrl)
         .then((response) => {
             if (response.ok) {
@@ -94,13 +108,13 @@ const displayWeather = (apiKey, city) => {
                     displayForecast(data);
                 });
             } else {
-                alert('Error: ' + response.statusText);
+                alert("Error: " + response.statusText);
             }
         })
         .catch((error) => {
-            alert('Unable to connect to OpenWeather');
+            alert("Unable to connect to OpenWeather");
         });
-}
+};
 
 // used to update the current weather card
 const displayCurrent = (city) => {
@@ -110,12 +124,12 @@ const displayCurrent = (city) => {
     let rightCurr = document.createElement("div");
     rightCurr.classList.add("current-text");
 
-    let dateEl = document.createElement("p");
-    dateEl.textContent = unixTimeConverter(city.current.dt);
-
     let iconEl = document.createElement("img");
     iconEl.src = `http://openweathermap.org/img/wn/${city.current.weather[0].icon}@4x.png`;
 
+    let dateEl = document.createElement("p");
+    dateEl.classList.add("text-center");
+    dateEl.textContent = unixTimeConverter(city.current.dt);
     leftCurr.append(dateEl, iconEl);
 
     let tempEl = document.createElement("p");
@@ -131,22 +145,27 @@ const displayCurrent = (city) => {
     let uvIndex = city.current.uvi;
 
     uvindexEl.textContent = `UV Index: ${uvIndex}`;
-    
+
     // checks the UV index to see which rating to give
     if (uvIndex <= 2) {
-        uvindexEl.classList.add("favorable");
-    }
-    else if (uvIndex <= 5) {
-        uvindexEl.classList.add("moderate");
-    }
-    else if (uvIndex > 5) {
-        uvindexEl.classList.add("severe");
+        uvindexEl.classList.add(...["badge", "rounded-pill", "bg-success"]);
+    } else if (uvIndex <= 5) {
+        uvindexEl.classList.add(...["badge", "rounded-pill", "bg-warning"]);
+    } else if (uvIndex > 5) {
+        uvindexEl.classList.add(...["badge", "rounded-pill", "bg-danger"]);
     }
 
     rightCurr.append(tempEl, windEl, humidityEl, uvindexEl);
 
-    presentEl.append(leftCurr, rightCurr);
-}
+    let cardBodyEl = document.createElement("div");
+    cardBodyEl.classList.add(
+        ...["card-body", "d-flex", "justify-content-evenly"]
+    );
+
+    cardBodyEl.append(leftCurr, rightCurr);
+
+    presentEl.append(cardBodyEl);
+};
 
 // used to update the 5 day forecast cards
 const displayForecast = (city) => {
@@ -154,13 +173,15 @@ const displayForecast = (city) => {
     // the timestamp for daily[0] was always today so I decided to start at daily[1]
     for (let i = 1; i < 6; i++) {
         let dayEl = document.createElement("div");
-        dayEl.classList.add("forecast");
+        dayEl.classList.add(...["forecast", "card", "bg-light"]);
 
         let dateEl = document.createElement("p");
+        dateEl.classList.add("text-center");
+
         dateEl.textContent = unixTimeConverter(city.daily[i].dt);
 
         let iconEl = document.createElement("img");
-        iconEl.src = `http://openweathermap.org/img/wn/${city.daily[i].weather[0].icon}@2x.png`
+        iconEl.src = `http://openweathermap.org/img/wn/${city.daily[i].weather[0].icon}@4x.png`;
 
         let tempEl = document.createElement("p");
         tempEl.textContent = `Temp: ${city.daily[i].temp.day}°F`;
@@ -174,13 +195,15 @@ const displayForecast = (city) => {
         dayEl.append(dateEl, iconEl, tempEl, windEl, humidityEl);
         futureEl.append(dayEl);
     }
-}
+};
 
 // used to convert the unix time stamp to a readable date
 const unixTimeConverter = (unix) => {
     let date = new Date(unix * 1000);
-    return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
-}
+    return (
+        date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear()
+    );
+};
 
 // event listener for submit button
 cityFormEl.addEventListener("submit", formSubmitHandler);
